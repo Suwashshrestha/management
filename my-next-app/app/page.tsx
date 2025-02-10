@@ -3,6 +3,22 @@ import Link from 'next/link';
 import {  FaConciergeBell, FaUtensils,  FaCoffee, FaUser } from 'react-icons/fa';
 import Image from 'next/image';
 
+
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => {
+  return (
+    <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl shadow-md hover:shadow-lg transition duration-200">
+      <div className="text-4xl text-brown-600 mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2 text-gray-900">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </div>
+  );
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
@@ -94,12 +110,3 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon, title, description }) {
-  return (
-    <div className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-xl shadow-md hover:shadow-lg transition duration-200">
-      <div className="text-4xl text-brown-600 mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2 text-gray-900">{title}</h3>
-      <p className="text-gray-600">{description}</p>
-    </div>
-  );
-}
