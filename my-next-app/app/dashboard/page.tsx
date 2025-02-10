@@ -2,20 +2,27 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '../../lib/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import { FaUser, FaCoffee, FaSearch, FaSignOutAlt, FaClock, FaCheckCircle, FaHourglassHalf } from 'react-icons/fa';
+
+interface Order {
+    id: number;
+    name: string;
+    customer: string;
+    status: string;
+}
 
 export default function Dashboard() {
     const router = useRouter();
-    const [user, setUser] = useState<null>(null);
-    const [orders, setOrders] = useState([
+    const [user, setUser] = useState<User | null>(null);
+    const [orders, setOrders] = useState<Order[]>([
         { id: 1, name: 'Latte', customer: 'John Doe', status: 'Completed' },
         { id: 2, name: 'Cappuccino', customer: 'Jane Smith', status: 'In Progress' },
         { id: 3, name: 'Espresso', customer: 'Bob Johnson', status: 'Pending' },
     ]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [filteredOrders, setFilteredOrders] = useState(orders);
-    const [newOrder, setNewOrder] = useState({ name: '', customer: '' });
+    const [filteredOrders, setFilteredOrders] = useState<Order[]>(orders);
+    const [newOrder, setNewOrder] = useState<{ name: string; customer: string }>({ name: '', customer: '' });
 
     const handleDeleteOrder = (id: number) => {
         const updatedOrders = orders.filter(order => order.id !== id);
@@ -70,7 +77,7 @@ export default function Dashboard() {
     const handleOrderSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (newOrder.name && newOrder.customer) {
-            const newOrderData = {
+            const newOrderData: Order = {
                 id: orders.length + 1,
                 name: newOrder.name,
                 customer: newOrder.customer,
