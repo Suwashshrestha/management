@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { FaHotel, FaConciergeBell, FaBed, FaUtensils, FaSwimmingPool, FaCoffee, FaUser } from 'react-icons/fa';
+import {  FaConciergeBell, FaUtensils,  FaCoffee, FaUser } from 'react-icons/fa';
 import Image from 'next/image';
 
 export default function Home() {
@@ -42,7 +42,7 @@ export default function Home() {
       <div className="relative h-screen">
         <div className="absolute inset-0">
           <Image
-            src="/cafe-hero.jpg"
+            src="/cafe-hero-2.jpeg"
             alt="Shrestha Cafe"
             fill
             className="object-cover"

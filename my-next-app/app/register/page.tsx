@@ -16,8 +16,12 @@ export default function Register() {
     try {
       await register(email, password);
       router.push('/dashboard');
-    } catch (err: any) {
-      setError(err.message || 'Failed to register. Please try again.');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(`Failed to login. Please check your credentials.`);
+      } else {
+        setError('An unknown error occurred.');
+      }
     }
   };
 

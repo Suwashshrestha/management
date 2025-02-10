@@ -7,7 +7,7 @@ import { FaUser, FaCoffee, FaSearch, FaSignOutAlt, FaClock, FaCheckCircle, FaHou
 
 export default function Dashboard() {
     const router = useRouter();
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<null>(null);
     const [orders, setOrders] = useState([
         { id: 1, name: 'Latte', customer: 'John Doe', status: 'Completed' },
         { id: 2, name: 'Cappuccino', customer: 'Jane Smith', status: 'In Progress' },

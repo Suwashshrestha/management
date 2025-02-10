@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa';
 
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,13 +17,18 @@ export default function Login() {
     try {
       await login(email, password);
       router.push('/dashboard');
-    } catch (err) {
-      setError('Failed to login. Please check your credentials.');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(`Failed to login. Please check your credentials.`);
+      } else {
+        setError('An unknown error occurred.');
+      }
     }
   };
+  
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-2xl">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
